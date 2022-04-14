@@ -10,43 +10,55 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Snack bar demo',
-      home: MyPage(),
+      home: FirstPage(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
     );
   }
 }
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
+
+class FirstPage extends StatelessWidget {
+  const FirstPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Toast message",),
-        centerTitle: true,
+        title: Text('First Page'),
       ),
       body: Center(
-        child: TextButton(
+        child: ElevatedButton(
+          child: Text('Go to the Second Page'),
           onPressed: () {
-            flutterToast();
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => SecondPage()
+            )
+            );
           },
-          child: Text('Toast'),
         ),
       ),
     );
   }
 }
 
-void flutterToast() {
-  Fluttertoast.showToast(
-      msg: "This is Center Short Toast",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0
-  );
+class SecondPage extends StatelessWidget {
+  const SecondPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second Page'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Go to the First Page'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
 }
