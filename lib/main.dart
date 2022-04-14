@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,12 +12,11 @@ class MyApp extends StatelessWidget {
       title: 'Snack bar demo',
       home: MyPage(),
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
       ),
     );
   }
 }
-
 class MyPage extends StatelessWidget {
   const MyPage({Key? key}) : super(key: key);
 
@@ -24,45 +24,29 @@ class MyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Snack bar'),
+        title: Text("Toast message",),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
       ),
-      body: MySnapBar(),
-    );
-  }
-}
-
-class MySnapBar extends StatelessWidget {
-  const MySnapBar({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-       child: ElevatedButton(
-       child: Text('Show me',
-          style: TextStyle(
-          color: Colors.white,
-          ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            flutterToast();
+          },
+          child: Text('Toast'),
         ),
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Snapbar',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.orange
-              ),),
-            duration: Duration(milliseconds: 3000),
-            backgroundColor: Colors.teal,
-            action: SnackBarAction(
-              onPressed: () {
-                print('snapBar is clicked');
-              }, label: 'Haha',
-            ),
-          )
-          );
-        }),
+      ),
     );
   }
 }
 
-
+void flutterToast() {
+  Fluttertoast.showToast(
+      msg: "This is Center Short Toast",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0
+  );
+}
