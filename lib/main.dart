@@ -27,13 +27,56 @@ class FirstPage extends StatelessWidget {
         title: Text('Scaffold Messenger'),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: Text('Go to the Screen Page'),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context)=>SecondPage(),
-            ),);
-          },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+            child: Text('Go to the Screen Page'),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context)=>SecondPage(),
+              ),);
+            },
+            ),
+            SizedBox(height: 20,),
+            TextButton(onLongPress: () {
+              print("long press");
+            }, child: Text('Text Button'),
+            style: TextButton.styleFrom(
+              primary: Colors.white,
+              backgroundColor: Colors.teal,
+            ), onPressed: () {
+                print("pressed");
+              },
+            ),
+            ElevatedButton(onPressed: (){}, child: Text('Elevated Button'),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 10.0,
+            ),),
+            ButtonBar(
+              alignment: MainAxisAlignment.center,
+                buttonPadding: EdgeInsets.all(20.0),
+                children: [
+              OutlinedButton(onPressed: null, child: Text('OutlinedButton'),
+              style: OutlinedButton.styleFrom(
+                onSurface: Colors.green,
+                primary: Colors.green,
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 2.0,
+                )
+              ),),
+              TextButton.icon(onPressed: (){}, icon: Icon(Icons.home, size: 30.0, color: Colors.black87,), label: Text('Go to Home'),
+              style: TextButton.styleFrom(
+                primary: Colors.red,
+                backgroundColor: Colors.yellow,
+              ),),
+            ]),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
